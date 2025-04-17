@@ -5,46 +5,46 @@ import random
 app = Flask(__name__)
 CORS(app)
 
-# openai.api_key = "sk-94ed57931c2c40dfa4f570b0db31488f"
+openai.api_key = "sk-94ed57931c2c40dfa4f570b0db31488f"
 
-# def deepseek_analyze(post):
-#     try:
-#         # Call OpenAI API to analyze the post
-#         response = openai.ChatCompletion.create(
-#             model="deepseek-chat",
-#             messages=[
-#                 {
-#                     "role": "system",
-#                     "content": "You are an AI that analyzes social media posts for sentiment and trend score. Respond only in JSON format like: {\"sentiment\": \"Positive\", \"trend_score\": 0.87}"
-#                 },
-#                 {
-#                     "role": "user",
-#                     "content": f"Analyze the sentiment and trend score of this post: '{post}'"
-#                 }
-#             ]
-#         )
+def deepseek_analyze(post):
+    try:
+        # Call OpenAI API to analyze the post
+        response = openai.ChatCompletion.create(
+            model="deepseek-chat",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are an AI that analyzes social media posts for sentiment and trend score. Respond only in JSON format like: {\"sentiment\": \"Positive\", \"trend_score\": 0.87}"
+                },
+                {
+                    "role": "user",
+                    "content": f"Analyze the sentiment and trend score of this post: '{post}'"
+                }
+            ]
+        )
         
-#         # Extract the content from the response
-#         content = response["choices"][0]["message"]["content"]
+        # Extract the content from the response
+        content = response["choices"][0]["message"]["content"]
 
-#         # Parse the JSON response
-#         parsed = json.loads(content)
-#         sentiment = parsed.get("sentiment", "Unknown")
-#         trend_score = float(parsed.get("trend_score", 0))
+        # Parse the JSON response
+        parsed = json.loads(content)
+        sentiment = parsed.get("sentiment", "Unknown")
+        trend_score = float(parsed.get("trend_score", 0))
 
-#         return {
-#             "sentiment": sentiment,
-#             "trend_score": trend_score
-#         }
-#     except json.JSONDecodeError:
-#         # Handle JSON parsing errors
-#         return {"error": "Failed to parse response from OpenAI API"}
-#     except Exception as e:
-#         # Handle other exceptions
-#         return {"error": str(e)}
+        return {
+            "sentiment": sentiment,
+            "trend_score": trend_score
+        }
+    except json.JSONDecodeError:
+        # Handle JSON parsing errors
+        return {"error": "Failed to parse response from OpenAI API"}
+    except Exception as e:
+        # Handle other exceptions
+        return {"error": str(e)}
 
 
-# Dummy sentiment and trend analyzer
+Dummy sentiment and trend analyzer
 def dummy_analyze(post):
     sentiments = ["Positive", "Negative", "Neutral"]
     return {
