@@ -5,7 +5,7 @@ import random
 app = Flask(__name__)
 CORS(app)
 
-openai.api_key = "sk-94ed57931c2c40dfa4f570b0db31488f"
+openai.api_key = ""
 
 def deepseek_analyze(post):
     try:
